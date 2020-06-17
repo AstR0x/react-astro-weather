@@ -1,0 +1,11 @@
+# idea
+/.idea
+
+# dependencies
+/node_modules
+
+# production
+/build
+
+# secret token
+/src/secret.json
