@@ -2,3 +2,12 @@
   margin: 6% auto;
   max-width: 50%;
 }
+
+.loader, .isNotFound {
+  text-align: center;
+  margin-top: 20%;
+}
+
+.isNotFound {
+  font-size: 24px;
+}

@@ -1,49 +1,27 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import { Navbar, Form, FormControl } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { generateRequestUrl } from '../../utils/generateRequestUrl';
-import { updateIsLoading, updateWeatherData } from '../../actions';
-import { Context } from '../../reducer';
-
 import { Icon } from '../Icon';
 
 import styles from './Header.module.scss';
 
-function Header() {
-  const { dispatch } = useContext(Context);
+interface HeaderProps {
+  updateWeatherData: (searchValue: string) => void,
+}
+
+const Header: React.FC<HeaderProps> = ({ updateWeatherData }) => {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    dispatch(updateIsLoading(false));
-    const parameter = [{ name: 'q', value: searchValue }];
-
-    const response = await fetch(generateRequestUrl(parameter));
-
-    const { name, sys, main, weather, cod } = await response.json();
-
-    const weatherData = {
-      city: name,
-      country: sys.country,
-      temp: main.temp,
-      icon: weather[0].icon,
-      description: weather[0].main,
-    };
-
-    if (cod === 200) {
-      dispatch(updateIsLoading(false));
-      dispatch(updateWeatherData(weatherData));
-    }
-
-    setSearchValue('');
+    updateWeatherData(searchValue);
   };
 
   return (
@@ -65,6 +43,6 @@ function Header() {
       </Navbar>
     </header>
   );
-}
+};
 
 export { Header };

@@ -5,8 +5,11 @@
   },
   "rules": {
     "arrow-parens": "off",
-    "react/jsx-one-expression-per-line": "off",
     "import/prefer-default-export": "off",
-    "max-len": "warn"
+    "max-len": "warn",
+    "object-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-unused-expressions": "off"
   }
 }
