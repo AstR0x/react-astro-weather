@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 import { Navbar, Form, FormControl } from 'react-bootstrap';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
-import { Icon } from '../Icon';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import styles from './Header.module.scss';
 
 interface HeaderProps {
-  updateWeatherData: (searchValue: string) => void,
+  updateWeatherData: (searchValue: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ updateWeatherData }) => {
@@ -26,19 +26,17 @@ const Header: React.FC<HeaderProps> = ({ updateWeatherData }) => {
 
   return (
     <header>
-      <Navbar className={styles.navbar} bg="light" expand="lg">
-        <Navbar.Brand href="/">AstroWeather</Navbar.Brand>
+      <Navbar className={styles.navbar} expand="lg">
+        <Navbar.Brand href="/">Astro Weather</Navbar.Brand>
         <Form onSubmit={handleSubmit} inline>
           <FormControl
             onChange={handleChange}
             value={searchValue}
             type="text"
-            placeholder="City"
+            placeholder="Город или район"
             className={styles.input}
           />
-          <div className={styles.icon}>
-            <Icon />
-          </div>
+          <SearchIcon className={styles.icon} />
         </Form>
       </Navbar>
     </header>

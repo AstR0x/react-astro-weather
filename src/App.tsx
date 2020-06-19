@@ -4,38 +4,47 @@ import useAsyncEffect from 'use-async-effect';
 
 import { Header } from './components/Header';
 import { Content } from './components/Content';
-import { generateRequestUrl, normalizeWeatherData, getCurrentPosition } from './utils';
-import { initialWeatherData } from './constants';
-import { WeatherData } from './entities';
+
+import { fetchForecastFromOpenWeather } from './api';
+
+import {
+  getCurrentPosition,
+  normalizeCurrentWeather,
+  normalizeDailyForecasts,
+} from './utils';
+
+import { initialForecast } from './initialStates';
+import { IForecast } from './interfaces';
+import { MOSCOW_COORDS } from './constants';
 
 import styles from './App.module.scss';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isNotFound, setIsNotFound] = useState<boolean>(false);
-  const [weatherData, setWeatherData] = useState<WeatherData>(initialWeatherData);
+  const [forecast, setForecast] = useState<IForecast>(initialForecast);
 
   useAsyncEffect(async () => {
-    const { coords } = await getCurrentPosition();
-    const { latitude, longitude } = coords;
+    const coords = MOSCOW_COORDS;
 
-    const params = [
-      {
-        name: 'lat',
-        value: latitude,
-      },
-      {
-        name: 'lon',
-        value: longitude,
-      },
-    ];
+    try {
+      const data = await getCurrentPosition();
+      coords.latitude = data.coords.latitude;
+      coords.longitude = data.coords.longitude;
+    } catch (e) {
+      console.log(e.message);
+    }
 
-    const response = await fetch(generateRequestUrl(params));
-    const data = await response.json();
+    const forecastData = await fetchForecastFromOpenWeather({ coords });
 
-    data.cod === 200
-      ? setWeatherData(normalizeWeatherData(data))
-      : setIsNotFound(true);
+    if (forecastData.cod === 200) {
+      setForecast({
+        dailyForecasts: normalizeDailyForecasts(forecastData.daily),
+        currentWeather: normalizeCurrentWeather(forecastData.current),
+      });
+    } else {
+      setIsNotFound(true);
+    }
 
     setIsLoading(false);
   }, []);
@@ -44,13 +53,16 @@ const App: React.FC = () => {
     setIsNotFound(false);
     setIsLoading(true);
 
-    const parameter = [{ name: 'q', value: searchValue }];
-    const response = await fetch(generateRequestUrl(parameter));
-    const data = await response.json();
+    const forecastData = await fetchForecastFromOpenWeather({ cityName: searchValue });
 
-    data.cod === 200
-      ? setWeatherData(normalizeWeatherData(data))
-      : setIsNotFound(true);
+    if (forecastData.cod === 200) {
+      setForecast({
+        dailyForecasts: normalizeDailyForecasts(forecastData.daily),
+        currentWeather: normalizeCurrentWeather(forecastData.current),
+      });
+    } else {
+      setIsNotFound(true);
+    }
 
     setIsLoading(false);
   };
@@ -61,7 +73,7 @@ const App: React.FC = () => {
       <Content
         isNotFound={isNotFound}
         isLoading={isLoading}
-        weatherData={weatherData}
+        forecast={forecast}
       />
     </div>
   );

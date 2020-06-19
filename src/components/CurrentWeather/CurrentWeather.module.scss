@@ -1,0 +1,88 @@
+.currentWeather {
+  height: 250px;
+  width: 50%;
+  min-width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
+  .header {
+    &::first-letter {
+      text-transform: uppercase;
+    }
+
+    .weekDay,
+    .date,
+    .time {
+      color: #666666;
+      font-size: 14px;
+    }
+
+    .date,
+    .time {
+      padding-left: 6px;
+    }
+
+    .location {
+      margin-top: 10px;
+      font-size: 18px;
+
+      .city {
+        margin-left: 2px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .important {
+    display: flex;
+    align-items: center;
+
+    .currentTemperature {
+      padding-top: 16px;
+      font-size: 42px;
+    }
+
+    .icon {
+      width: 90px;
+    }
+
+    .description {
+      font-size: 22px;
+      line-height: 1.1em;
+      padding-top: 12px;
+      margin: 0;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    .feelsLike {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    color: #666;
+
+    .windSpeed, .humidity {
+      margin-right: 10px;
+    }
+
+    .footerIcon {
+      margin-right: 4px;
+      height: 24px;
+      width: 24px;
+    }
+
+    .sunset {
+      margin-left: 30px;
+    }
+  }
+}

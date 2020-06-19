@@ -1,3 +1,3 @@
-export { generateRequestUrl } from './generateRequestUrl';
-export { normalizeWeatherData } from './normalizeWeatherData';
+export { normalizeCurrentWeather } from './normalizeCurrentWeather';
+export { normalizeDailyForecasts } from './normalizeDailyForecasts';
 export { getCurrentPosition } from './getCurrentPosition';

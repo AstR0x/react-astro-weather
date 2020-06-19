@@ -1,19 +1,4 @@
-export const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
-
-export const initialWeatherData = {
-  city: '',
-  icon: '',
-  country: '',
-  description: '',
-  temp: {
-    current: 0,
-    max: 0,
-    min: 0,
-    feelsLike: 0,
-  },
-  pressure: 0,
-  wind: {
-    speed: 0,
-    deg: 0,
-  },
-};
+export const SECONDS_IN_HOUR = 3600;
+export const MILLISECONDS_IN_SECOND = 1000;
+export const ZERO_CENTIGRADE_IN_KELVINS = 273.15;
+export const MOSCOW_COORDS = { latitude: 55.75222000, longitude: 37.6155600 };

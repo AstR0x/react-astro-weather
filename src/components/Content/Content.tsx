@@ -2,19 +2,20 @@ import React from 'react';
 
 import { Spinner } from 'react-bootstrap';
 
-import { WeatherInfo } from '../WeatherInfo';
-import { WeatherData } from '../../entities';
+import { CurrentWeather } from '../CurrentWeather';
+import { DailyForecasts } from '../DailyForecasts';
+import { IForecast } from '../../interfaces';
 
 import styles from './Content.module.scss';
 
 interface ContentProps {
-  weatherData: WeatherData;
+  forecast: IForecast;
   isLoading: boolean;
   isNotFound: boolean;
 }
 
 const Content: React.FC<ContentProps> = ({
-  weatherData,
+  forecast,
   isLoading,
   isNotFound,
 }) => {
@@ -29,14 +30,15 @@ const Content: React.FC<ContentProps> = ({
   if (isNotFound) {
     return (
       <div className={styles.isNotFound}>
-        <h2>City is not found</h2>
+        <h2>Город не найден</h2>
       </div>
     );
   }
 
   return (
     <div className={styles.content}>
-      <WeatherInfo weatherData={weatherData} />
+      <CurrentWeather currentWeather={forecast.currentWeather} />
+      <DailyForecasts dailyForecasts={forecast.dailyForecasts} />
     </div>
   );
 };

@@ -1,0 +1,1 @@
+export { fetchForecastFromOpenWeather } from './fetchForecastFromOpenWeather';
