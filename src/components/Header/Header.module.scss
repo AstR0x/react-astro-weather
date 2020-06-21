@@ -4,11 +4,63 @@
   justify-content: space-between;
   height: 70px;
   padding: 0 20%;
+
+  .logo {
+    padding-top: 12px;
+
+    .cloudIcon {
+      width: 40px;
+      padding-bottom: 4px;
+    }
+  
+    .name {
+      margin-left: 10px;
+    }
+  }
+
+  .formContainer {
+    .input {
+      height: 35px;
+      width: 500px;
+      padding-left: 8px;
+      border: 1px solid rgb(172, 172, 172);
+      border-radius: 4px;
+      outline-color: rgb(79, 76, 238);
+      outline-width: 1px;
+    }
+  
+    .searchIcon {
+      width: 18px;
+      position: relative;
+      top: 2px;
+      right: 30px;
+    }
+
+    .addresses {
+      padding: 10px 0 0 0;
+      width: 500px;
+      position: absolute;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 0 0 10px 10px;
+      list-style: none;
+
+      .address {
+        display: flex;
+        align-items: center;
+        padding: 8px 0 8px 10px;
+        border-radius: 2px;
+        line-height: 1.3em;
+
+        &:hover {
+          background-color: rgb(207, 207, 224);
+        }
+
+        &:last-child {
+          padding-bottom: 16px;
+        }
+      }
+    }
+  }
 }
 
-.icon {
-  width: 18px;
-  position: relative;
-  top: 2px;
-  right: 30px;
-}

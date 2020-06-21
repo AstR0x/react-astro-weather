@@ -30,6 +30,10 @@ export const initialCurrentWeather = {
     date: '',
     time: '',
   },
+  coords: {
+    latitude: 0,
+    longitude: 0,
+  },
 };
 
 export const initialDailyForecasts = [

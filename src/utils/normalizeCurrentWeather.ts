@@ -1,6 +1,7 @@
+import { IReceivedCurrentWeatherFromAPI } from 'interfaces';
+
 import { formCityTime } from './formCityTime';
 import { processTemperature } from './processTemperature';
-import { IReceivedCurrentWeatherFromAPI } from '../interfaces';
 
 export const normalizeCurrentWeather = ({
   name,
@@ -10,6 +11,7 @@ export const normalizeCurrentWeather = ({
   wind,
   dt,
   timezone,
+  coord,
 }: IReceivedCurrentWeatherFromAPI) => ({
   city: name,
   country: sys.country,
@@ -26,5 +28,9 @@ export const normalizeCurrentWeather = ({
   cityDate: formCityTime({ dt, timezone }),
   sunrise: formCityTime({ dt: sys.sunrise, timezone }),
   sunset: formCityTime({ dt: sys.sunset, timezone }),
+  coords: {
+    latitude: coord.lat,
+    longitude: coord.lon,
+  },
   wind,
 });

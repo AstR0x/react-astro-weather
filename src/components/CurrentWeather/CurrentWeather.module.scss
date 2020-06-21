@@ -1,6 +1,6 @@
 .currentWeather {
-  height: 250px;
-  width: 50%;
+  height: 300px;
+  width: 40%;
   min-width: 400px;
   padding: 20px;
   background-color: #fff;
@@ -65,10 +65,16 @@
     }
   }
 
+  .line {
+    width: 90%;
+    margin: 55px auto 0 auto;
+    border-top: 1px solid rgb(241, 240, 240);
+  }
+
   .footer {
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
-    margin-top: 25px;
     color: #666;
 
     .windSpeed, .humidity {

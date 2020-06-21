@@ -9,6 +9,7 @@
     "max-len": "warn",
     "object-curly-newline": "off",
     "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "react/prop-types": "off",
     "@typescript-eslint/no-unused-expressions": "off"
   }

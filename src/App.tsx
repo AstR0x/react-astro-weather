@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 
 import useAsyncEffect from 'use-async-effect';
 
-import { Header } from './components/Header';
-import { Content } from './components/Content';
+import { Header } from 'components/Header';
+import { Content } from 'components/Content';
 
-import { fetchForecastFromOpenWeather } from './api';
+import { fetchForecastFromOpenWeather } from 'api';
 
 import {
   getCurrentPosition,
   normalizeCurrentWeather,
   normalizeDailyForecasts,
-} from './utils';
+} from 'utils';
 
-import { initialForecast } from './initialStates';
-import { IForecast } from './interfaces';
+import { initialForecast } from 'initialStates';
+import { IForecast } from 'interfaces';
+
+import styles from 'App.module.scss';
+
 import { MOSCOW_COORDS } from './constants';
-
-import styles from './App.module.scss';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -49,11 +50,13 @@ const App: React.FC = () => {
     setIsLoading(false);
   }, []);
 
-  const updateWeatherData = async (searchValue: string) => {
+  const updateWeatherData = async (coords: { latitude: string, longitude: string }) => {
     setIsNotFound(false);
     setIsLoading(true);
 
-    const forecastData = await fetchForecastFromOpenWeather({ cityName: searchValue });
+    const forecastData = await fetchForecastFromOpenWeather({
+      cityName: searchValue,
+    });
 
     if (forecastData.cod === 200) {
       setForecast({

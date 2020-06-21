@@ -1,5 +1,6 @@
+import { IFormCityTime } from 'interfaces';
+
 import { MILLISECONDS_IN_SECOND, SECONDS_IN_HOUR } from '../constants';
-import { IFormCityTime } from '../interfaces';
 
 interface IFormLocalTimeProps {
   dt: number;

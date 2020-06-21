@@ -1,10 +1,13 @@
 import React from 'react';
 
+import { YMaps, Map } from 'react-yandex-maps';
+
 import { Spinner } from 'react-bootstrap';
 
-import { CurrentWeather } from '../CurrentWeather';
-import { DailyForecasts } from '../DailyForecasts';
-import { IForecast } from '../../interfaces';
+import { CurrentWeather } from 'components/CurrentWeather';
+import { DailyForecasts } from 'components/DailyForecasts';
+
+import { IForecast } from 'interfaces';
 
 import styles from './Content.module.scss';
 
@@ -37,7 +40,18 @@ const Content: React.FC<ContentProps> = ({
 
   return (
     <div className={styles.content}>
-      <CurrentWeather currentWeather={forecast.currentWeather} />
+      <div className={styles.firstLine}>
+        <CurrentWeather currentWeather={forecast.currentWeather} />
+        <div className={styles.mapContainer}>
+          <YMaps>
+            <Map
+              height={300}
+              width={540}
+              defaultState={{ center: [forecast.currentWeather.coords.latitude, forecast.currentWeather.coords.longitude], zoom: 8 }}
+            />
+          </YMaps>
+        </div>
+      </div>
       <DailyForecasts dailyForecasts={forecast.dailyForecasts} />
     </div>
   );

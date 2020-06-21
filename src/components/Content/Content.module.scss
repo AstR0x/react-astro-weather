@@ -1,6 +1,14 @@
 .content {
-  margin: 4% auto;
+  margin: 10% auto;
   max-width: 60%;
+
+  .firstLine {
+    display: flex;
+
+    .mapContainer {
+      margin-left: 10px;
+    }
+  }
 }
 
 .loader, .isNotFound {

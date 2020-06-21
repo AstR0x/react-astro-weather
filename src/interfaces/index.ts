@@ -103,9 +103,13 @@ export interface ICurrentWeather {
     speed: number;
     deg: number;
   };
-  sunrise: IFormCityTime,
-  sunset: IFormCityTime,
+  sunrise: IFormCityTime;
+  sunset: IFormCityTime;
   cityDate: IFormCityTime;
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface IDailyForecast {
@@ -119,8 +123,8 @@ export interface IDailyForecast {
 }
 
 export interface IForecast {
-  dailyForecasts: IDailyForecast[],
-  currentWeather: ICurrentWeather,
+  dailyForecasts: IDailyForecast[];
+  currentWeather: ICurrentWeather;
 }
 
 export interface IOptionalParam {

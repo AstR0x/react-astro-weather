@@ -2,9 +2,9 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import styles from './DailyForecast.module.scss';
+import { IDailyForecast } from 'interfaces';
 
-import { IDailyForecast } from '../../interfaces';
+import styles from './DailyForecast.module.scss';
 
 interface IDailyForecastsProps {
   dailyForecasts: IDailyForecast[];

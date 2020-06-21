@@ -1,6 +1,7 @@
+import { IReceivedDailyForecastFromAPI } from 'interfaces';
+
 import { formCityTime } from './formCityTime';
 import { processTemperature } from './processTemperature';
-import { IReceivedDailyForecastFromAPI } from '../interfaces';
 
 export const normalizeDailyForecasts = ({
   timezone_offset: timezone,

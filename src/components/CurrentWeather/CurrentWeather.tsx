@@ -2,15 +2,15 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { ReactComponent as WindIcon } from '../../assets/icons/wind.svg';
-import { ReactComponent as BarometerIcon } from '../../assets/icons/barometer.svg';
-import { ReactComponent as DropIcon } from '../../assets/icons/drop.svg';
-import { ReactComponent as SunriseIcon } from '../../assets/icons/sunrise.svg';
-import { ReactComponent as SunsetIcon } from '../../assets/icons/sunset.svg';
+import { ICurrentWeather } from 'interfaces';
+
+import { ReactComponent as WindIcon } from 'assets/icons/wind.svg';
+import { ReactComponent as BarometerIcon } from 'assets/icons/barometer.svg';
+import { ReactComponent as DropIcon } from 'assets/icons/drop.svg';
+import { ReactComponent as SunriseIcon } from 'assets/icons/sunrise.svg';
+import { ReactComponent as SunsetIcon } from 'assets/icons/sunset.svg';
 
 import styles from './CurrentWeather.module.scss';
-
-import { ICurrentWeather } from '../../interfaces';
 
 interface ICurrentWeatherProps {
   currentWeather: ICurrentWeather;
@@ -50,6 +50,7 @@ const CurrentWeather: React.FC<ICurrentWeatherProps> = ({ currentWeather }) => {
           </p>
         </div>
       </div>
+      <div className={styles.line} />
       <div className={styles.footer}>
         <div>
           <span className={styles.windSpeed}>
