@@ -1,37 +1,25 @@
-export interface IReceivedCurrentWeatherFromAPI {
-  base: string;
-  clouds: {
-    all: number;
-  };
+export interface IReceivedTodayForecast {
+  timezone: number;
+  name: string;
   cod: number;
+  dt: number;
   coord: {
     lon: number;
     lat: number;
   };
-  dt: number;
-  id: number;
   main: {
     temp: number;
     feels_like: number;
-    temp_min: number;
-    temp_max: number;
     pressure: number;
     humidity: number;
   };
-  name: string;
   sys: {
-    type: number;
-    id: number;
     country: string;
     sunrise: number;
     sunset: number;
   };
-  timezone: number;
-  visibility: number;
   weather: [
     {
-      id: number;
-      main: string;
       description: string;
       icon: string;
     }
@@ -42,40 +30,21 @@ export interface IReceivedCurrentWeatherFromAPI {
   };
 }
 
-export interface IReceivedDailyForecastFromAPI {
-  lat: number;
-  lon: number;
-  timezone: string;
+export interface IReceivedDailyForecast {
   timezone_offset: number;
   daily: [
     {
-      clouds: number;
-      dew_point: number;
       dt: number;
-      feels_like: {
-        day: number;
-        eve: number;
-        morn: number;
-        night: number;
-      };
       humidity: number;
       pressure: number;
-      rain: number;
       sunrise: number;
       sunset: number;
       temp: {
         day: number;
-        eve: number;
-        max: number;
-        min: number;
-        mon: number;
         night: number;
       };
-      uvi: number;
       weather: [
         {
-          id: number;
-          main: string;
           description: string;
           icon: string;
         }
@@ -86,30 +55,25 @@ export interface IReceivedDailyForecastFromAPI {
   ];
 }
 
-export interface ICurrentWeather {
+export interface ITodayForecast {
   city: string;
   country: string;
   temp: {
     current: string;
-    max: string;
-    min: string;
     feelsLike: string;
+  };
+  wind: {
+    speed: number;
+    deg: number;
   };
   pressure: number;
   humidity: number;
   icon: string;
   description: string;
-  wind: {
-    speed: number;
-    deg: number;
-  };
   sunrise: IFormCityTime;
   sunset: IFormCityTime;
   cityDate: IFormCityTime;
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
+  coords: ICoords,
 }
 
 export interface IDailyForecast {
@@ -123,8 +87,8 @@ export interface IDailyForecast {
 }
 
 export interface IForecast {
-  dailyForecasts: IDailyForecast[];
-  currentWeather: ICurrentWeather;
+  daily: IDailyForecast[];
+  today: ITodayForecast;
 }
 
 export interface IOptionalParam {
@@ -136,4 +100,9 @@ export interface IFormCityTime {
   weekDay: string;
   date: string;
   time: string;
+}
+
+export interface ICoords {
+  latitude: number;
+  longitude: number;
 }

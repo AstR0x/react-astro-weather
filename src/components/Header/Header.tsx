@@ -29,19 +29,14 @@ const Header: React.FC<HeaderProps> = ({ updateWeatherData }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const firstAddressData = addresses.suggestions[0].data;
-    const coords = {
-      latitude: firstAddressData.get_lat,
-      longitude: firstAddressData.get_lon,
-    };
 
     setSearchValue('');
-    updateWeatherData(coords);
+    updateWeatherData(searchValue);
   };
 
   return (
-    <header>
-      <Navbar className={styles.navbar} expand="lg">
+    <header className={styles.header}>
+      <Navbar className={styles.navbar}>
         <Navbar.Brand className={styles.logo} href="/">
           <CloudIcon className={styles.cloudIcon} />
           <span className={styles.name}>Astro Weather</span>

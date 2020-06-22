@@ -1,4 +1,4 @@
-export const initialCurrentWeather = {
+export const today = {
   icon: '',
   city: '',
   country: '',
@@ -7,8 +7,6 @@ export const initialCurrentWeather = {
   description: '',
   temp: {
     current: '',
-    max: '',
-    min: '',
     feelsLike: '',
   },
   wind: {
@@ -36,7 +34,7 @@ export const initialCurrentWeather = {
   },
 };
 
-export const initialDailyForecasts = [
+export const daily = [
   {
     description: '',
     icon: '',
@@ -53,6 +51,6 @@ export const initialDailyForecasts = [
 ];
 
 export const initialForecast = {
-  currentWeather: initialCurrentWeather,
-  dailyForecasts: initialDailyForecasts,
+  today,
+  daily,
 };

@@ -29,7 +29,7 @@ export const formCityTime = ({
     localDate.getUTCMonth(),
     localDate.getUTCDate(),
     localDate.getUTCHours() + hourShift,
-    localDate.getUTCMinutes() + minutesShift,
+    localDate.getMinutes() + minutesShift,
     localDate.getUTCSeconds(),
   );
 

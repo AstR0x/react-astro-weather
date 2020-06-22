@@ -1,3 +1,3 @@
-export { normalizeCurrentWeather } from './normalizeCurrentWeather';
-export { normalizeDailyForecasts } from './normalizeDailyForecasts';
+export { normalizeTodayForecast } from './normalizeTodayForecast';
+export { normalizeDailyForecast } from './normalizeDailyForecast';
 export { getCurrentPosition } from './getCurrentPosition';

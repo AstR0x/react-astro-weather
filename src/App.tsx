@@ -5,12 +5,12 @@ import useAsyncEffect from 'use-async-effect';
 import { Header } from 'components/Header';
 import { Content } from 'components/Content';
 
-import { fetchForecastFromOpenWeather } from 'api';
+import { fetchForecast } from 'api';
 
 import {
   getCurrentPosition,
-  normalizeCurrentWeather,
-  normalizeDailyForecasts,
+  normalizeTodayForecast,
+  normalizeDailyForecast,
 } from 'utils';
 
 import { initialForecast } from 'initialStates';
@@ -36,12 +36,12 @@ const App: React.FC = () => {
       console.log(e.message);
     }
 
-    const forecastData = await fetchForecastFromOpenWeather({ coords });
+    const forecastData = await fetchForecast({ coords });
 
     if (forecastData.cod === 200) {
       setForecast({
-        dailyForecasts: normalizeDailyForecasts(forecastData.daily),
-        currentWeather: normalizeCurrentWeather(forecastData.current),
+        daily: normalizeDailyForecast(forecastData.daily),
+        today: normalizeTodayForecast(forecastData.today),
       });
     } else {
       setIsNotFound(true);
@@ -50,18 +50,18 @@ const App: React.FC = () => {
     setIsLoading(false);
   }, []);
 
-  const updateWeatherData = async (coords: { latitude: string, longitude: string }) => {
+  const updateWeatherData = async (searchValue: string) => {
     setIsNotFound(false);
     setIsLoading(true);
 
-    const forecastData = await fetchForecastFromOpenWeather({
+    const forecastData = await fetchForecast({
       cityName: searchValue,
     });
 
     if (forecastData.cod === 200) {
       setForecast({
-        dailyForecasts: normalizeDailyForecasts(forecastData.daily),
-        currentWeather: normalizeCurrentWeather(forecastData.current),
+        daily: normalizeDailyForecast(forecastData.daily),
+        today: normalizeTodayForecast(forecastData.today),
       });
     } else {
       setIsNotFound(true);

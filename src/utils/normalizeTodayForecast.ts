@@ -1,9 +1,9 @@
-import { IReceivedCurrentWeatherFromAPI } from 'interfaces';
+import { IReceivedTodayForecast } from 'interfaces';
 
 import { formCityTime } from './formCityTime';
 import { processTemperature } from './processTemperature';
 
-export const normalizeCurrentWeather = ({
+export const normalizeTodayForecast = ({
   name,
   sys,
   main,
@@ -12,13 +12,11 @@ export const normalizeCurrentWeather = ({
   dt,
   timezone,
   coord,
-}: IReceivedCurrentWeatherFromAPI) => ({
+}: IReceivedTodayForecast) => ({
   city: name,
   country: sys.country,
   temp: {
     current: processTemperature(main.temp),
-    max: processTemperature(main.temp_max),
-    min: processTemperature(main.temp_min),
     feelsLike: processTemperature(main.feels_like),
   },
   pressure: main.pressure,

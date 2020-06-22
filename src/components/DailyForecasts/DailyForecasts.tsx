@@ -7,12 +7,12 @@ import { IDailyForecast } from 'interfaces';
 import styles from './DailyForecast.module.scss';
 
 interface IDailyForecastsProps {
-  dailyForecasts: IDailyForecast[];
+  daily: IDailyForecast[];
 }
 
-const DailyForecasts: React.FC<IDailyForecastsProps> = ({ dailyForecasts }) => (
+const DailyForecasts: React.FC<IDailyForecastsProps> = ({ daily }) => (
   <div className={styles.dailyForecasts}>
-    {dailyForecasts.map(({ temp, icon, cityDate, description }) => (
+    {daily.map(({ temp, icon, cityDate, description }) => (
       <div key={cityDate.date} className={styles.dayForecast}>
         <div className={styles.weekDay}>{cityDate.weekDay}</div>
         <div className={styles.date}>{cityDate.date}</div>
