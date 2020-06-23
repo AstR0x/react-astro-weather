@@ -17,6 +17,8 @@ interface ContentProps {
   isNotFound: boolean;
 }
 
+const { width, height } = window.screen;
+
 const Content: React.FC<ContentProps> = ({
   forecast,
   isLoading,
@@ -42,15 +44,23 @@ const Content: React.FC<ContentProps> = ({
     <div className={styles.content}>
       <div className={styles.firstLine}>
         <TodayForecast today={forecast.today} />
-        <div className={styles.mapContainer}>
-          <YMaps>
-            <Map
-              height={300}
-              width={575}
-              defaultState={{ center: [forecast.today.coords.latitude, forecast.today.coords.longitude], zoom: 12 }}
-            />
-          </YMaps>
-        </div>
+        {width > height && (
+          <div className={styles.mapContainer}>
+            <YMaps>
+              <Map
+                height={300}
+                width={575}
+                defaultState={{
+                  center: [
+                    forecast.today.coords.latitude,
+                    forecast.today.coords.longitude,
+                  ],
+                  zoom: 12,
+                }}
+              />
+            </YMaps>
+          </div>
+        )}
       </div>
       <DailyForecasts daily={forecast.daily} />
     </div>

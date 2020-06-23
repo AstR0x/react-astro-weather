@@ -1,6 +1,18 @@
 .content {
-  margin: 10% auto 0 auto;
+  margin: 5% auto 0 auto;
   max-width: 60%;
+
+  @media screen and (max-width: 1440px) {
+    max-width: 80%;
+  }
+
+  @media screen and (max-width: 1280px) {
+    margin-top: 35px;
+  }
+
+  @media screen and (max-width: 414px) {
+    max-width: 100%;
+  }
 
   .firstLine {
     display: flex;

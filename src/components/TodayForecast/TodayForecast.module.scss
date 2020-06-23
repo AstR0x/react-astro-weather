@@ -1,11 +1,15 @@
 .currentWeather {
   height: 300px;
   width: 50%;
-  min-width: 400px;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+
+  @media screen and (max-width: 414px) {
+    width: 100%;
+    border-radius: 0;
+  }
 
   .header {
     &::first-letter {
@@ -77,6 +81,14 @@
     justify-content: space-between;
     color: #666;
 
+    @media screen and (max-width: 1366px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 414px) {
+      display: block;
+    }
+
     .windSpeed, .humidity {
       margin-right: 10px;
     }
@@ -85,10 +97,19 @@
       margin-right: 4px;
       height: 20px;
       width: 20px;
+
+      @media screen and (max-width: 1366px) {
+        width: 16px;
+        height: 16px;
+      }
     }
 
     .sunset {
       margin-left: 30px;
+
+      @media screen and (max-width: 1280px) {
+        margin-left: 8px;
+      }
     }
   }
 }
