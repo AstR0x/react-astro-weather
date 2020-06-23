@@ -3,11 +3,12 @@
 }
 
 .navbar {
+  display: flex;
+  justify-content: space-between;
   max-width: 60%;
   height: 70px;
   margin: 0 auto;
   padding: 0;
-  justify-content: space-between;
 
   @media screen and (max-width: 1440px) {
     max-width: 80%;
@@ -36,6 +37,10 @@
   }
 
   .formContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+
     @media screen and (max-width: 414px) {
       width: 100%
     }

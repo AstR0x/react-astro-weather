@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import { useDebouncedCallback } from 'use-debounce';
 
-import { Navbar, Form } from 'react-bootstrap';
-
 import { ReactComponent as SearchIcon } from 'assets/icons/search.svg';
 import { ReactComponent as CloudIcon } from 'assets/icons/cloud.svg';
 
@@ -54,13 +52,13 @@ const Header: React.FC<HeaderProps> = ({ updateForecast }) => {
 
   return (
     <header className={styles.header}>
-      <Navbar className={styles.navbar}>
-        <Navbar.Brand className={styles.logo} href="/">
+      <nav className={styles.navbar}>
+        <span className={styles.logo}>
           <CloudIcon className={styles.cloudIcon} />
           <span className={styles.name}>Astro Weather</span>
-        </Navbar.Brand>
+        </span>
         <div className={styles.formContainer}>
-          <Form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <input
               value={cityName}
               onChange={handleChange}
@@ -85,9 +83,9 @@ const Header: React.FC<HeaderProps> = ({ updateForecast }) => {
                 ))}
               </ul>
             ) : null}
-          </Form>
+          </form>
         </div>
-      </Navbar>
+      </nav>
     </header>
   );
 };
