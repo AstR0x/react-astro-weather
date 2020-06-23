@@ -47,7 +47,7 @@ const Content: React.FC<ContentProps> = ({
             <Map
               height={300}
               width={575}
-              defaultState={{ center: [forecast.today.coords.latitude, forecast.today.coords.longitude], zoom: 8 }}
+              defaultState={{ center: [forecast.today.coords.latitude, forecast.today.coords.longitude], zoom: 12 }}
             />
           </YMaps>
         </div>

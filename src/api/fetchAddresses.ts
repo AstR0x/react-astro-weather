@@ -3,7 +3,7 @@ const params = {
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    Authorization: 'Token 9b7aa9667052e5152d2a2b2a3714d9847d57f147',
+    Authorization: 'Token YOUR_TOKEN',
   },
   body: '',
 };

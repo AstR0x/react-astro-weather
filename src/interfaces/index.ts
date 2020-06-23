@@ -86,9 +86,22 @@ export interface IDailyForecast {
   };
 }
 
+export interface ISearchParams {
+  coords?: ICoords,
+  cityName?: string,
+}
+
 export interface IForecast {
   daily: IDailyForecast[];
   today: ITodayForecast;
+}
+
+export interface IAddress {
+  value: string,
+  data: {
+    geo_lat: string,
+    geo_lon: string,
+  }
 }
 
 export interface IOptionalParam {

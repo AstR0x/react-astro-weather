@@ -14,7 +14,7 @@ import {
 } from 'utils';
 
 import { initialForecast } from 'initialStates';
-import { IForecast } from 'interfaces';
+import { IForecast, ISearchParams } from 'interfaces';
 
 import styles from 'App.module.scss';
 
@@ -50,13 +50,16 @@ const App: React.FC = () => {
     setIsLoading(false);
   }, []);
 
-  const updateWeatherData = async (searchValue: string) => {
+  const updateForecast = async ({ cityName, coords }: ISearchParams) => {
     setIsNotFound(false);
     setIsLoading(true);
 
-    const forecastData = await fetchForecast({
-      cityName: searchValue,
-    });
+    const searchParams = {
+      cityName,
+      coords,
+    };
+
+    const forecastData = await fetchForecast(searchParams);
 
     if (forecastData.cod === 200) {
       setForecast({
@@ -72,7 +75,7 @@ const App: React.FC = () => {
 
   return (
     <div className={styles.app}>
-      <Header updateWeatherData={updateWeatherData} />
+      <Header updateForecast={updateForecast} />
       <Content
         isNotFound={isNotFound}
         isLoading={isLoading}

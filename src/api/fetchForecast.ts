@@ -1,14 +1,8 @@
+import { ISearchParams } from 'interfaces';
+
 import { generateRequestUrl } from './generateRequestUrl';
 
-interface IFetchForecast {
-  cityName?: string;
-  coords?: {
-    latitude: number;
-    longitude: number;
-  };
-}
-
-export const fetchForecast = async ({ cityName, coords }: IFetchForecast) => {
+export const fetchForecast = async ({ cityName, coords }: ISearchParams) => {
   const todayParams = cityName
     ? [{
       name: 'q',

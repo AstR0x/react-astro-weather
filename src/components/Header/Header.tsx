@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import { DebounceInput } from 'react-debounce-input';
+import { useDebouncedCallback } from 'use-debounce';
+
 import { Navbar, Form } from 'react-bootstrap';
 
 import { ReactComponent as SearchIcon } from 'assets/icons/search.svg';
@@ -8,30 +9,47 @@ import { ReactComponent as CloudIcon } from 'assets/icons/cloud.svg';
 
 import { fetchAddresses } from 'api';
 
+import { IAddress, ISearchParams } from 'interfaces';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import styles from './Header.module.scss';
 
 interface HeaderProps {
-  updateWeatherData: (searchValue: string) => void;
+  updateForecast: ({ coords, cityName }: ISearchParams) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ updateWeatherData }) => {
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [addresses, setAddresses] = useState<any>([]);
+const Header: React.FC<HeaderProps> = ({ updateForecast }) => {
+  const [cityName, setCityName] = useState<string>('');
+  const [addresses, setAddresses] = useState<IAddress[]>([]);
+
+  const [debouncedSetAddresses] = useDebouncedCallback(async (name: string) => {
+    const { suggestions } = await fetchAddresses(name);
+    setAddresses(suggestions);
+  }, 500);
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { suggestions } = await fetchAddresses(event.target.value);
+    debouncedSetAddresses(event.target.value);
+    setCityName(event.target.value);
+  };
 
-    setSearchValue(event.target.value);
-    setAddresses(suggestions);
+  const handleClick = (address: IAddress) => () => {
+    const coords = {
+      latitude: parseFloat(address.data.geo_lat),
+      longitude: parseFloat(address.data.geo_lon),
+    };
+
+    updateForecast({ coords });
+    setAddresses([]);
+    setCityName('');
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setSearchValue('');
-    updateWeatherData(searchValue);
+    updateForecast({ cityName });
+    setAddresses([]);
+    setCityName('');
   };
 
   return (
@@ -43,27 +61,31 @@ const Header: React.FC<HeaderProps> = ({ updateWeatherData }) => {
         </Navbar.Brand>
         <div className={styles.formContainer}>
           <Form onSubmit={handleSubmit}>
-            <DebounceInput
-              value={searchValue}
-              minLength={2}
-              debounceTimeout={800}
+            <input
+              value={cityName}
               onChange={handleChange}
               className={styles.input}
-              type="text"
               placeholder="Город или район"
+              type="text"
               required
             />
             <SearchIcon className={styles.searchIcon} />
+            {addresses.length ? (
+              <ul className={styles.addresses}>
+                {addresses.map((address: IAddress) => (
+                  <li className={styles.address} key={address.value}>
+                    <button
+                      onClick={handleClick(address)}
+                      className={styles.button}
+                      type="button"
+                    >
+                      {address.value}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </Form>
-          {addresses.length ? (
-            <ul className={styles.addresses}>
-              {addresses.map((address: any) => (
-                <li className={styles.address} key={address.value}>
-                  {address.value}
-                </li>
-              ))}
-            </ul>
-          ) : null}
         </div>
       </Navbar>
     </header>
